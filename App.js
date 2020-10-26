@@ -5,11 +5,11 @@ import { createStackNavigator } from '@react-navigation/stack';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
 
 import Login from './pages/login';
-import Dashboard from './pages/espaco/dashboard'
-import Grupo from './pages/espaco/grupo'
-import Disciplina from './pages/espaco/disciplina'
-import Skill from './pages/espaco/skill'
-import Perfil from './pages/espaco/perfil'
+import Dashboard from './pages/espaco-aluno/dashboard'
+import Grupo from './pages/espaco-aluno/grupo'
+import Disciplina from './pages/espaco-aluno/disciplina'
+import Skill from './pages/espaco-aluno/skill'
+import Perfil from './pages/espaco-aluno/perfil'
 
 
 const Stack = createStackNavigator();

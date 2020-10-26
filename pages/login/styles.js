@@ -3,7 +3,7 @@ import styled from 'styled-components/native'
 
 export const ContainerLogo = styled.View`
     flex: 1;
-    margin-top: 10%;
+    margin-top: 6%;
 `;
 export const Logo = styled.Image`
     width: 270px;
@@ -64,7 +64,14 @@ export const EsqueciSenhaTexto = styled.Text`
     margin-top: -7px;
 `;
 
-export const CadastrarBtn = styled.TouchableOpacity`
+export const ContainerAbaixoBtn = styled.View`
+    flex-direction: row;
+    flex: 1;
+    align-items: flex-end;
+    margin-bottom: 5px;
+`;
+
+export const DireitoBtn = styled.TouchableOpacity`
     border-width: 2px;
     border-color: #ae1b73;
     border-radius: 5px;
@@ -74,13 +81,13 @@ export const CadastrarBtn = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
 `;
-export const CadastrarTexto = styled.Text`
+export const DireitoTexto = styled.Text`
     font-size: 16px;
     color: #ae1b73;
     font-weight: 700;
 `;
 
-export const EntrarBtn = styled.TouchableOpacity`
+export const EsquerdoBtn = styled.TouchableOpacity`
     background: #ae1b73;
     border-radius: 5px;
     flex: 1;
@@ -89,7 +96,7 @@ export const EntrarBtn = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
 `;
-export const EntrarTexto = styled.Text`
+export const EsquerdoTexto = styled.Text`
     font-size: 16px;
     color: #fff;
     font-weight: 700;

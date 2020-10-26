@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import {ImageBackground, StyleSheet, Image } from 'react-native'
+
 import {
     CaixaLogin,
     ContainerBtn,
@@ -9,18 +10,22 @@ import {
     InputTexto,
     EsqueciSenhaBtn,
     EsqueciSenhaTexto,
-    CadastrarBtn,
-    CadastrarTexto,
-    EntrarBtn,
-    EntrarTexto,
+    ContainerAbaixoBtn,
+    DireitoBtn,
+    DireitoTexto,
+    EsquerdoBtn,
+    EsquerdoTexto,
     Logo,
     ContainerLogo
 } from './styles'
 
-const Login = () => {
+const Login = ({navigation}) => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
+    const [esqueciSenha, setEsqueciSenha] = useState(false);
+
     return (
         <ImageBackground source={require('../../assets/background.png')} style={styles.imgBackgr}>
+            
             <ContainerLogo>
                 <Logo source={require('../../assets/logo.png')} />
             </ContainerLogo>
@@ -40,25 +45,44 @@ const Login = () => {
                     </Btn>
                 </ContainerBtn>
 
-                <InputTexto>E-mail</InputTexto>
-                <Input />
+                { !esqueciSenha ?
+                    <>
+                        <InputTexto>E-mail</InputTexto>
+                        <Input />
+        
+                        <InputTexto>Senha</InputTexto>
+                        <Input />
+        
+                        <EsqueciSenhaBtn onPress={() => setEsqueciSenha(true)}>
+                            <EsqueciSenhaTexto>Esqueci minha senha</EsqueciSenhaTexto>
+                        </EsqueciSenhaBtn>
+        
+                        <ContainerAbaixoBtn>
+                            <DireitoBtn>
+                                <DireitoTexto>Cadastre-se</DireitoTexto>
+                            </DireitoBtn>
+        
+                            <EsquerdoBtn onPress={() =>{navigation.push("SpaceTabs")}}>
+                                <EsquerdoTexto>Entrar</EsquerdoTexto>
+                            </EsquerdoBtn>
+                        </ContainerAbaixoBtn>
+                    </>
+                :
+                    <>
+                        <InputTexto>Informe seu e-mail para recuperação de senha:</InputTexto>
+                        <Input />
 
-                <InputTexto>Senha</InputTexto>
-                <Input />
+                        <ContainerAbaixoBtn>
+                            <DireitoBtn onPress={() => setEsqueciSenha(false)}>
+                                <DireitoTexto>Voltar</DireitoTexto>
+                            </DireitoBtn>
 
-                <EsqueciSenhaBtn>
-                    <EsqueciSenhaTexto>Esqueci minha senha</EsqueciSenhaTexto>
-                </EsqueciSenhaBtn>
-
-                <ContainerBtn>
-                    <CadastrarBtn>
-                        <CadastrarTexto>Cadastre-se</CadastrarTexto>
-                    </CadastrarBtn>
-
-                    <EntrarBtn>
-                        <EntrarTexto>Entrar</EntrarTexto>
-                    </EntrarBtn>
-                </ContainerBtn>
+                            <EsquerdoBtn>
+                                <EsquerdoTexto>Enviar</EsquerdoTexto>
+                            </EsquerdoBtn>
+                        </ContainerAbaixoBtn>
+                    </>
+                }
             </CaixaLogin>
         </ImageBackground>
     )

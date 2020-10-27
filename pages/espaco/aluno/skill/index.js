@@ -3,6 +3,6 @@ import { Text } from 'react-native'
 
 export default props => {
     return (
-        <Text>Grupo</Text>
+        <Text>SkillAluno</Text>
     )
 }

@@ -25,7 +25,6 @@ const Login = ({navigation}) => {
 
     return (
         <ImageBackground source={require('../../assets/background.png')} style={styles.imgBackgr}>
-            
             <ContainerLogo>
                 <Logo source={require('../../assets/logo.png')} />
             </ContainerLogo>
@@ -51,18 +50,30 @@ const Login = ({navigation}) => {
                         <Input />
         
                         <InputTexto>Senha</InputTexto>
-                        <Input />
+                        <Input secureTextEntry={true}/>
         
                         <EsqueciSenhaBtn onPress={() => setEsqueciSenha(true)}>
                             <EsqueciSenhaTexto>Esqueci minha senha</EsqueciSenhaTexto>
                         </EsqueciSenhaBtn>
         
                         <ContainerAbaixoBtn>
-                            <DireitoBtn>
+                            <DireitoBtn onPress={() => {
+                                    if (currentBtn === 'aluno' ) {
+                                        navigation.push("CadastroAluno")
+                                    } else {
+                                        navigation.push("CadastroProfessor")
+                                    }
+                                }}>
                                 <DireitoTexto>Cadastre-se</DireitoTexto>
                             </DireitoBtn>
         
-                            <EsquerdoBtn onPress={() =>{navigation.push("SpaceTabs")}}>
+                            <EsquerdoBtn onPress={() => {
+                                    if (currentBtn === 'aluno' ) {
+                                        navigation.push("SpaceTabsAluno")
+                                    } else {
+                                        navigation.push("SpaceTabsProfessor")
+                                    }
+                                }}>
                                 <EsquerdoTexto>Entrar</EsquerdoTexto>
                             </EsquerdoBtn>
                         </ContainerAbaixoBtn>

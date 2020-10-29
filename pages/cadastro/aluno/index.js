@@ -1,10 +1,16 @@
 import React, {useState} from 'react'
 import {ImageBackground, StyleSheet, Image, Text } from 'react-native'
+import {
+    VoltarBtn,
+    TextoBtn,
+} from './styles'
 
 const CadastroAluno = ({navigation}) => {
     return (
         <>
-            <Text>CadastroAluno</Text>
+            <VoltarBtn>
+                <TextoBtn>X</TextoBtn>
+            </VoltarBtn>
         </>
     )
 }

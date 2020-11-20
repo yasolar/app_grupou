@@ -11,6 +11,20 @@ export const Logo = styled.Image`
     border-radius: 10px;
 `;
 
+export const CaixaInfoChamada = styled.View`
+    align-items: center;
+    flex: 1;
+    justify-content: flex-start;
+`;
+export const InfoChamadaTexto = styled.Text`
+    font-size: 30px;
+    color: #fff;
+    text-shadow: 1.2px 1.2px 4px rgba(0,0,0, 0.8);
+`;
+export const GrupouTexto = styled.Text`
+    font-weight: bold;
+`;
+    
 export const CaixaLogin = styled.View`
     background-color: #fff;
     height: 52%;
@@ -25,7 +39,7 @@ export const ContainerBtn = styled.View`
     margin-bottom: 30px;
 `;
 
-export const Btn = styled.TouchableOpacity`
+export const ProfAlunoBtn = styled.TouchableOpacity`
     border-bottom-width: 4px;
     border-bottom-color: ${({lastClick}) => lastClick ? "#ae1b73" : "#fff"};
     height: 45px;
@@ -34,7 +48,7 @@ export const Btn = styled.TouchableOpacity`
     justify-content: center;
     align-items: center;
 `;
-export const BtnTexto = styled.Text`
+export const ProfAlunoTexto = styled.Text`
     font-size:20px;
     color: ${({lastClick}) => lastClick ? "#673f66" : "#b6b6b6"};
 `;
@@ -56,20 +70,43 @@ export const InputTexto = styled.Text`
 export const EsqueciSenhaBtn = styled.TouchableOpacity`
     flex-direction: column;
     align-items: flex-end;
-    margin-bottom: 25px;
+    margin-bottom: 40px;
+    margin-right: 4px;
 `;
 export const EsqueciSenhaTexto = styled.Text`
-    font-size: 13px;
+    font-size: 14px;
     color: #ae1b73;
-    margin-top: -7px;
+    align-items: flex-start;
+    margin-top: -5px;
 `;
 
-export const ContainerAbaixoBtn = styled.View`
+export const ContainerCadEnter = styled.View`
     flex-direction: row;
     flex: 1;
     align-items: flex-end;
-    margin-bottom: 5px;
 `;
+
+export const CadEnterBtn = styled.TouchableOpacity`
+    flex: 1;
+    width: 100%;
+    height: 60px;
+    background-color: ${props => props.invert ? "#fff" : "#ae1b73"};
+    border: 2px solid #ae1b73;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center;
+    margin-right: ${props => props.invert ? "10px" : "0px"}; 
+`;
+
+export const CadEnterTexto = styled.Text`
+    color: ${props => props.invert ? "#ae1b73" : "#fff"};
+    font-size: 16px;
+    font-weight: bold;
+`;
+
+
+
+/*
 
 export const DireitoBtn = styled.TouchableOpacity`
     border-width: 2px;
@@ -101,4 +138,4 @@ export const EsquerdoTexto = styled.Text`
     color: #fff;
     font-weight: 700;
 `;
-
+*/

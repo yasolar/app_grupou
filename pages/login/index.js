@@ -1,97 +1,143 @@
 import React, {useState} from 'react'
-import {ImageBackground, StyleSheet, Image } from 'react-native'
+import {ImageBackground, StyleSheet, ActivityIndicator } from 'react-native'
 
 import {
+    ContainerLogo,
+    Logo,
+    CaixaInfoChamada,
+    InfoChamadaTexto,
+    GrupouTexto,
     CaixaLogin,
     ContainerBtn,
-    Btn,
-    BtnTexto,
+    ProfAlunoBtn,
+    ProfAlunoTexto,
     Input,
     InputTexto,
     EsqueciSenhaBtn,
     EsqueciSenhaTexto,
-    ContainerAbaixoBtn,
-    DireitoBtn,
-    DireitoTexto,
-    EsquerdoBtn,
-    EsquerdoTexto,
-    Logo,
-    ContainerLogo
+    ContainerCadEnter,
+    CadEnterBtn,
+    CadEnterTexto
 } from './styles'
 
 const Login = ({navigation}) => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
+    const [email, setEmail] = useState("");
+    const [senha, setSenha] = useState("");
+    const [carregando, setCarregando] = useState(false);
     const [esqueciSenha, setEsqueciSenha] = useState(false);
+
+    function handleEntrar(){
+        console.warn(`${email} e ${senha}`);
+    }
+
+    function handleCadastrar(){
+        console.warn(`${email} e ${senha}`);
+    }
 
     return (
         <ImageBackground source={require('../../assets/background.png')} style={styles.imgBackgr}>
             <ContainerLogo>
                 <Logo source={require('../../assets/logo.png')} />
             </ContainerLogo>
+
+            <CaixaInfoChamada>
+                <InfoChamadaTexto>
+                    Problemas para formar
+                </InfoChamadaTexto>
+                <InfoChamadaTexto>
+                    um grupo de trabalho?
+                </InfoChamadaTexto>
+                <InfoChamadaTexto>
+                    O <GrupouTexto>Grupou!</GrupouTexto> resolve!
+                </InfoChamadaTexto>
+            </CaixaInfoChamada>
             
             <CaixaLogin>
                 <ContainerBtn>
-                    <Btn
+                    <ProfAlunoBtn
                         onPress={() => setCurrentBtn('aluno')}
                         lastClick={currentBtn === 'aluno' ? true : false}>
-                        <BtnTexto lastClick={currentBtn === 'aluno' ? true : false}>Aluno</BtnTexto>
-                    </Btn>
+                        <ProfAlunoTexto lastClick={currentBtn === 'aluno' ? true : false}>
+                            Aluno
+                        </ProfAlunoTexto>
+                    </ProfAlunoBtn>
 
-                    <Btn
+                    <ProfAlunoBtn
                         onPress={() => setCurrentBtn('professor')}
                         lastClick={currentBtn === 'professor' ? true : false}>
-                        <BtnTexto lastClick={currentBtn === 'professor' ? true : false}>Professor</BtnTexto>
-                    </Btn>
+                        <ProfAlunoTexto lastClick={currentBtn === 'professor' ? true : false}>
+                            Professor
+                        </ProfAlunoTexto>
+                    </ProfAlunoBtn>
                 </ContainerBtn>
 
                 { !esqueciSenha ?
                     <>
                         <InputTexto>E-mail</InputTexto>
-                        <Input />
+                        <Input 
+                            placeholder="Digite seu e-mail"
+                            onChangeText={text => setEmail(text)}
+                        />
         
                         <InputTexto>Senha</InputTexto>
-                        <Input secureTextEntry={true}/>
+                        <Input 
+                            placeholder="Digite sua senha"
+                            secureTextEntry={true}
+                            onChangeText={text => setSenha(text)}
+                        />
         
                         <EsqueciSenhaBtn onPress={() => setEsqueciSenha(true)}>
                             <EsqueciSenhaTexto>Esqueci minha senha</EsqueciSenhaTexto>
                         </EsqueciSenhaBtn>
         
-                        <ContainerAbaixoBtn>
-                            <DireitoBtn onPress={() => {
+                        <ContainerCadEnter>
+                            <CadEnterBtn invert={true} onPress={() => {
+                                    handleCadastrar();
                                     if (currentBtn === 'aluno' ) {
                                         navigation.push("CadastroAluno")
                                     } else {
                                         navigation.push("CadastroProfessor")
                                     }
                                 }}>
-                                <DireitoTexto>Cadastre-se</DireitoTexto>
-                            </DireitoBtn>
+                                {carregando ?
+                                    <ActivityIndicator color="#ae1b7"/>
+                                :
+                                    <CadEnterTexto invert={true}>
+                                        Cadastre-se
+                                    </CadEnterTexto>
+                                }
+                            </CadEnterBtn>
         
-                            <EsquerdoBtn onPress={() => {
+                            <CadEnterBtn onPress={() => {
+                                    handleEntrar();
                                     if (currentBtn === 'aluno' ) {
                                         navigation.push("SpaceTabsAluno")
                                     } else {
                                         navigation.push("SpaceTabsProfessor")
                                     }
                                 }}>
-                                <EsquerdoTexto>Entrar</EsquerdoTexto>
-                            </EsquerdoBtn>
-                        </ContainerAbaixoBtn>
+                                <CadEnterTexto>Entrar</CadEnterTexto>
+                            </CadEnterBtn>
+                        </ContainerCadEnter>
                     </>
                 :
                     <>
                         <InputTexto>Informe seu e-mail para recuperação de senha:</InputTexto>
-                        <Input />
+                        <Input 
+                            placeholder="Digite seu e-mail"
+                            onChangeText={text => setEmail(text)}
+                        />
 
-                        <ContainerAbaixoBtn>
-                            <DireitoBtn onPress={() => setEsqueciSenha(false)}>
-                                <DireitoTexto>Voltar</DireitoTexto>
-                            </DireitoBtn>
+                        <ContainerCadEnter>
+                            <CadEnterBtn invert={true} onPress={() => setEsqueciSenha(false)}>
+                                <CadEnterTexto invert={true}>Voltar</CadEnterTexto>
+                            </CadEnterBtn>
 
-                            <EsquerdoBtn>
-                                <EsquerdoTexto>Enviar</EsquerdoTexto>
-                            </EsquerdoBtn>
-                        </ContainerAbaixoBtn>
+                            <CadEnterBtn onPress={()=>{handleEntrar()}}>
+                                <CadEnterTexto>Enviar</CadEnterTexto>
+                            </CadEnterBtn>
+                        </ContainerCadEnter>
                     </>
                 }
             </CaixaLogin>

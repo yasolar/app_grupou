@@ -20,7 +20,12 @@ import {
     CadEnterTexto
 } from './styles'
 
-const Login = ({navigation}) => {
+// import TabsScreenAluno from '../pages/espaco/aluno/tabs';
+// import TabsScreenProfessor from '../pages/espaco/professor/tabs';
+// import CadastroAluno from '../pages/cadastro/aluno';
+// import CadastroProfessor from '../pages/cadastro/professor';
+
+const Login = () => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
@@ -31,7 +36,7 @@ const Login = ({navigation}) => {
         setCarregando(true);
         // console.warn(`${email} e ${senha}`);
         if (currentBtn === 'aluno' ) {
-            navigation.push("SpaceTabsAluno")
+            < dd/>
         } else {
             navigation.push("SpaceTabsProfessor")
         }

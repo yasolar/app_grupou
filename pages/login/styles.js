@@ -29,9 +29,9 @@ export const CaixaLogin = styled.View`
     background-color: #fff;
     height: 52%;
     width: 100%;
+    padding: 20px;
     border-top-right-radius: 25px;
     border-top-left-radius: 25px;
-    padding: 20px;
 `;
 
 export const ContainerBtn = styled.View`

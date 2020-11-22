@@ -8,7 +8,6 @@ const Routes = () => {
     return (
         <NavigationContainer>
             { true ?
-
                 <AppRoutes />
             :
                 <AuthRoutes />

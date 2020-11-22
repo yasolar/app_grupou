@@ -1,5 +1,6 @@
 import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs'
+import { MaterialCommunityIcons } from "@expo/vector-icons" 
 
 import Dashboard from '../dashboard'
 import Grupo from '../grupo'
@@ -11,12 +12,80 @@ import Perfil from '../perfil'
 const Tabs = createBottomTabNavigator();
 
 const TabsScreenAluno = () => (
-  <Tabs.Navigator>
-    <Tabs.Screen name="Dashboard" component={Dashboard}/>
-    <Tabs.Screen name="Grupo" component={Grupo} />
-    <Tabs.Screen name="Disciplina" component={Disciplina} />
-    <Tabs.Screen name="Skill" component={Skill} />
-    <Tabs.Screen name="Perfil" component={Perfil} />
+  <Tabs.Navigator 
+    initialRouteName="Dashboard"
+    tabBarOptions={
+      {
+        activeTintColor: 'tomato',
+        inactiveTintColor: '#ccc'
+      }
+    }
+  >
+    <Tabs.Screen 
+      name="Dashboard" 
+      component={Dashboard}
+      options={
+        {tabBarIcon : ({color}) => (
+          <MaterialCommunityIcons
+            name="view-dashboard-outline"
+            color={color}
+            size={32}
+          />
+        )}
+      }
+    />
+    <Tabs.Screen
+      name="Grupo"
+      component={Grupo}
+      options={
+        {tabBarIcon : ({color}) => (
+          <MaterialCommunityIcons
+            name="account-group-outline"
+            color={color}
+            size={32}
+          />
+        )}
+      }
+    />
+    <Tabs.Screen
+      name="Disciplina"
+      component={Disciplina}
+      options={
+        {tabBarIcon : ({color}) => (
+          <MaterialCommunityIcons
+            name="book-open-outline"
+            color={color}
+            size={32}
+          />
+        )}
+      }
+    />
+    <Tabs.Screen
+      name="Skill"
+      component={Skill}
+      options={
+        {tabBarIcon : ({color}) => (
+          <MaterialCommunityIcons
+            name="puzzle-outline"
+            color={color}
+            size={32}
+          />
+        )}
+      }
+    />
+    <Tabs.Screen
+      name="Perfil"
+      component={Perfil}
+      options={
+        {tabBarIcon : ({color}) => (
+          <MaterialCommunityIcons
+            name="account-outline"
+            color={color}
+            size={32}
+          />
+        )}
+      }
+    />
   </Tabs.Navigator>
 )
 

@@ -103,39 +103,3 @@ export const CadEnterTexto = styled.Text`
     font-size: 16px;
     font-weight: bold;
 `;
-
-
-
-/*
-
-export const DireitoBtn = styled.TouchableOpacity`
-    border-width: 2px;
-    border-color: #ae1b73;
-    border-radius: 5px;
-    height: 60px;
-    flex: 1;
-    margin: 0px 5px;
-    justify-content: center;
-    align-items: center;
-`;
-export const DireitoTexto = styled.Text`
-    font-size: 16px;
-    color: #ae1b73;
-    font-weight: 700;
-`;
-
-export const EsquerdoBtn = styled.TouchableOpacity`
-    background: #ae1b73;
-    border-radius: 5px;
-    flex: 1;
-    height: 60px;
-    margin: 0px 5px;
-    justify-content: center;
-    align-items: center;
-`;
-export const EsquerdoTexto = styled.Text`
-    font-size: 16px;
-    color: #fff;
-    font-weight: 700;
-`;
-*/

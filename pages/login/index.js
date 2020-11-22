@@ -28,11 +28,25 @@ const Login = ({navigation}) => {
     const [esqueciSenha, setEsqueciSenha] = useState(false);
 
     function handleEntrar(){
-        console.warn(`${email} e ${senha}`);
+        setCarregando(true);
+        // console.warn(`${email} e ${senha}`);
+        if (currentBtn === 'aluno' ) {
+            navigation.push("SpaceTabsAluno")
+        } else {
+            navigation.push("SpaceTabsProfessor")
+        }
+        setCarregando(false);
     }
 
     function handleCadastrar(){
-        console.warn(`${email} e ${senha}`);
+        setCarregando(true);
+        // console.warn(`${email} e ${senha}`);
+        if (currentBtn === 'aluno' ) {
+            navigation.push("CadastroAluno");
+        } else {
+            navigation.push("CadastroProfessor");
+        }
+        setCarregando(false);
     }
 
     return (
@@ -92,14 +106,7 @@ const Login = ({navigation}) => {
                         </EsqueciSenhaBtn>
         
                         <ContainerCadEnter>
-                            <CadEnterBtn invert={true} onPress={() => {
-                                    handleCadastrar();
-                                    if (currentBtn === 'aluno' ) {
-                                        navigation.push("CadastroAluno")
-                                    } else {
-                                        navigation.push("CadastroProfessor")
-                                    }
-                                }}>
+                            <CadEnterBtn invert={true} onPress={() => handleCadastrar()}>
                                 {carregando ?
                                     <ActivityIndicator color="#ae1b7"/>
                                 :
@@ -109,15 +116,14 @@ const Login = ({navigation}) => {
                                 }
                             </CadEnterBtn>
         
-                            <CadEnterBtn onPress={() => {
-                                    handleEntrar();
-                                    if (currentBtn === 'aluno' ) {
-                                        navigation.push("SpaceTabsAluno")
-                                    } else {
-                                        navigation.push("SpaceTabsProfessor")
-                                    }
-                                }}>
-                                <CadEnterTexto>Entrar</CadEnterTexto>
+                            <CadEnterBtn onPress={() => handleEntrar()}>
+                                {carregando ?
+                                    <ActivityIndicator color="#ae1b7"/>
+                                :
+                                    <CadEnterTexto>
+                                        Entrar
+                                    </CadEnterTexto>
+                                }
                             </CadEnterBtn>
                         </ContainerCadEnter>
                     </>

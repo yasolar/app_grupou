@@ -6,10 +6,13 @@ import {
     Texto
 } from './styles'
 
-export default props => {
+const Settings = () => {
     return (
         <Container>
-            <Texto>DisciplinaAluno</Texto>
+            <Texto>SETTINGS</Texto>
         </Container>
     )
 }
+
+
+export default Settings;

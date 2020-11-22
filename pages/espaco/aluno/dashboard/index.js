@@ -1,8 +1,15 @@
 import React, {useState} from 'react'
 import { Text } from 'react-native'
 
+import {
+    Container,
+    Texto
+} from './styles'
+
 export default props => {
     return (
-        <Text>DashboardAluno</Text>
+        <Container>
+            <Texto>DashboardAluno</Texto>
+        </Container>
     )
 }

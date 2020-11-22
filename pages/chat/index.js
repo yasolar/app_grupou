@@ -6,10 +6,13 @@ import {
     Texto
 } from './styles'
 
-export default props => {
+const Chat = () => {
     return (
         <Container>
-            <Texto>DisciplinaAluno</Texto>
+            <Texto>CHAAAT</Texto>
         </Container>
     )
 }
+
+
+export default Chat;

@@ -3,10 +3,12 @@ import './services/firebase';
 import React from 'react';
 
 import Routes from './routes'
-
+import { UsuarioProvider } from './contexts/user'
 
 export default function App() {
   return (
-    <Routes />
+    <UsuarioProvider>
+      <Routes />
+    </UsuarioProvider>
   );
 }

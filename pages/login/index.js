@@ -1,6 +1,7 @@
-import React, {useState} from 'react'
+import React, {useState, useContext} from 'react'
 import {ImageBackground, StyleSheet, ActivityIndicator } from 'react-native'
 
+import { UsuarioContext } from '../../contexts/user'
 import {
     ContainerLogo,
     Logo,
@@ -20,11 +21,6 @@ import {
     CadEnterTexto
 } from './styles'
 
-// import TabsScreenAluno from '../pages/espaco/aluno/tabs';
-// import TabsScreenProfessor from '../pages/espaco/professor/tabs';
-// import CadastroAluno from '../pages/cadastro/aluno';
-// import CadastroProfessor from '../pages/cadastro/professor';
-
 const Login = () => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
     const [email, setEmail] = useState("");
@@ -32,26 +28,41 @@ const Login = () => {
     const [carregando, setCarregando] = useState(false);
     const [esqueciSenha, setEsqueciSenha] = useState(false);
 
-    function handleEntrar(){
+    const {signIn, signUp} = useContext(UsuarioContext);
+
+    function handleSignIn(){
         setCarregando(true);
-        // console.warn(`${email} e ${senha}`);
-        if (currentBtn === 'aluno' ) {
-            < dd/>
-        } else {
-            navigation.push("SpaceTabsProfessor")
-        }
+        try{
+            signIn(email, senha);
+        }catch(err){
+            console.warn('login enter erro: ', err)
+        }finally{
         setCarregando(false);
+        }
+        
+        // if (currentBtn === 'aluno' ) {
+        //     < dd/>
+        // } else {
+        //     navigation.push("SpaceTabsProfessor")
+        // }
     }
 
-    function handleCadastrar(){
+    function handleSignUp(){
         setCarregando(true);
-        // console.warn(`${email} e ${senha}`);
-        if (currentBtn === 'aluno' ) {
-            navigation.push("CadastroAluno");
-        } else {
-            navigation.push("CadastroProfessor");
-        }
+        try{
+            signUp(email, senha);
+        }catch(err){
+            console.warn('login cad erro: ', err)
+        }finally{
         setCarregando(false);
+        }
+
+
+        // if (currentBtn === 'aluno' ) {
+        //     navigation.push("CadastroAluno");
+        // } else {
+        //     navigation.push("CadastroProfessor");
+        // }
     }
 
     return (
@@ -111,7 +122,7 @@ const Login = () => {
                         </EsqueciSenhaBtn>
         
                         <ContainerCadEnter>
-                            <CadEnterBtn invert={true} onPress={() => handleCadastrar()}>
+                            <CadEnterBtn invert={true} onPress={() => handleSignUp()}>
                                 {carregando ?
                                     <ActivityIndicator color="#ae1b7"/>
                                 :
@@ -121,7 +132,7 @@ const Login = () => {
                                 }
                             </CadEnterBtn>
         
-                            <CadEnterBtn onPress={() => handleEntrar()}>
+                            <CadEnterBtn onPress={() => handleSignIn()}>
                                 {carregando ?
                                     <ActivityIndicator color="#ae1b7"/>
                                 :
@@ -145,7 +156,7 @@ const Login = () => {
                                 <CadEnterTexto invert={true}>Voltar</CadEnterTexto>
                             </CadEnterBtn>
 
-                            <CadEnterBtn onPress={()=>{handleEntrar()}}>
+                            <CadEnterBtn onPress={()=>{handleSignIn()}}>
                                 <CadEnterTexto>Enviar</CadEnterTexto>
                             </CadEnterBtn>
                         </ContainerCadEnter>

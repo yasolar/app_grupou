@@ -6,10 +6,12 @@ import {
     Texto
 } from './styles'
 
-export default props => {
+const Disciplina = () => {
     return (
         <Container>
             <Texto>DisciplinaProf</Texto>
         </Container>
     )
 }
+
+export default Disciplina;

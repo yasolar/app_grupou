@@ -6,10 +6,12 @@ import {
     Texto
 } from './styles'
 
-export default props => {
+const Grupo = () => {
     return (
         <Container>
             <Texto>GrupoAluno</Texto>
         </Container>
     )
 }
+
+export default Grupo;

@@ -1,15 +1,21 @@
-import React, {useState} from 'react'
-import { Text } from 'react-native'
+import React, { useState, useContext } from 'react'
 
 import {
     Container,
     Texto
 } from './styles'
+import { UsuarioContext } from '../../../../contexts/user';
 
-export default props => {
+const Dashboard = () => {
+    const {user} = useContext(UsuarioContext);
+    const {tipo} = useContext(UsuarioContext);
+
     return (
         <Container>
-            <Texto>DashboardAluno</Texto>
+            <Texto>{user.email}</Texto>
+            <Texto>{tipo}</Texto>
         </Container>
     )
 }
+
+export default Dashboard;

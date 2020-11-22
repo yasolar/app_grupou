@@ -15,9 +15,14 @@ const TabsScreenProfessor = () => (
     initialRouteName="Disciplina"
     tabBarOptions={
       {
-        activeTintColor: 'tomato',
-        inactiveTintColor: '#ccc'
-      }
+        activeTintColor: '#fff',
+        inactiveTintColor: '#ccc',
+        style: {
+          backgroundColor: '#ae1b73',
+          height: 70,
+          paddingBottom: 12,
+        },
+      } 
     }
   >
     <Tabs.Screen

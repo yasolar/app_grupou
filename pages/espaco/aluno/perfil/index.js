@@ -1,15 +1,29 @@
-import React, {useState} from 'react'
-import { Text } from 'react-native'
+import React, {useState, useContext} from 'react'
 
+import { UsuarioContext } from '../../../../contexts/user'
 import {
     Container,
-    Texto
+    Texto,
+    ContainerBtn,
+    SairBtn,
+    TextoBtn
 } from './styles'
 
-export default props => {
+const Perfil = () => {
+    const {signOut} = useContext(UsuarioContext);
+
+    const sair = () => {signOut()}
+
     return (
         <Container>
             <Texto>PerfilAluno</Texto>
+            <ContainerBtn>
+                <SairBtn onPress={() => { signOut() }}>
+                    <TextoBtn>Sair</TextoBtn>
+                </SairBtn>
+            </ContainerBtn>
         </Container>
     )
 }
+
+export default Perfil;

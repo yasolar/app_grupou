@@ -22,17 +22,18 @@ export const CaixaBranca = styled.View`
 `;
 
 export const Conversa = styled.View`
-    flex: 5;
+    flex: 4;
     background-color: #fff;
-    flex-direction: row;
-    align-items: flex-end;
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     width: 100%;
     height: 65%;
+    padding: 25px;
 `;
 export const Mensagem = styled.Text`
-    font-size: 24px;
+    font-size: 20px;
+    text-align: justify;
+    padding-top: 5px;
 `;
 
 export const Envio = styled.View`

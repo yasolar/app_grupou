@@ -23,46 +23,70 @@ import {
 
 const Login = () => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    // const [email, setEmail] = useState("2010203250@aluno.unicarioca.com"); // 2008458634@professor.unicarioca.com
+    const [email, setEmail] = useState("1@aluno.unicarioca.com"); // 1@professor.unicarioca.com
+    const [senha, setSenha] = useState("123456");
     const [carregando, setCarregando] = useState(false);
     const [esqueciSenha, setEsqueciSenha] = useState(false);
 
-    const {signIn, signUp} = useContext(UsuarioContext);
+    const {signIn, signUp, setTipo} = useContext(UsuarioContext);
 
     function handleSignIn(){
         setCarregando(true);
-        try{
-            signIn(email, senha);
-        }catch(err){
-            console.warn('login enter erro: ', err)
-        }finally{
-        setCarregando(false);
-        }
+        const emailAluno = email.indexOf('@aluno');
+        const emailProf = email.indexOf('@professor');
         
-        // if (currentBtn === 'aluno' ) {
-        //     < dd/>
-        // } else {
-        //     navigation.push("SpaceTabsProfessor")
-        // }
+        if (currentBtn === 'aluno' && emailAluno !== -1 ) {
+            try{
+                setTipo('aluno');
+                signIn(email, senha);
+            }catch(err){
+                console.warn('login enter erro: ', err)
+            }finally{
+            setCarregando(false);
+            }
+        } else if (currentBtn === 'professor' && emailProf !== -1) {
+            try{
+                setTipo('professor');
+                signIn(email, senha);
+            }catch(err){
+                console.warn('login enter erro: ', err)
+            }finally{
+            setCarregando(false);
+            }
+        } else {
+            console.warn('Há informações incorretas!');
+            setCarregando(false);
+        }
     }
 
     function handleSignUp(){
         setCarregando(true);
-        try{
-            signUp(email, senha);
-        }catch(err){
-            console.warn('login cad erro: ', err)
-        }finally{
-        setCarregando(false);
+        const emailAluno = email.indexOf('@aluno');
+        const emailProf = email.indexOf('@professor');
+
+        if (currentBtn === 'aluno' && emailAluno !== -1 ) {
+            try{
+                setTipo('aluno');
+                signUp(email, senha);
+            }catch(err){
+                console.warn('login cad erro: ', err)
+            }finally{
+            setCarregando(false);
+            }
+        } else if (currentBtn === 'professor' && emailProf !== -1) {
+            try{
+                setTipo('professor');
+                signUp(email, senha);
+            }catch(err){
+                console.warn('login cad erro: ', err)
+            }finally{
+            setCarregando(false);
+            }
+        } else {
+            console.warn('Há informações incorretas!');
+            setCarregando(false);
         }
-
-
-        // if (currentBtn === 'aluno' ) {
-        //     navigation.push("CadastroAluno");
-        // } else {
-        //     navigation.push("CadastroProfessor");
-        // }
     }
 
     return (
@@ -108,6 +132,7 @@ const Login = () => {
                         <Input 
                             placeholder="Digite seu e-mail"
                             onChangeText={text => setEmail(text)}
+                            value={email}
                         />
         
                         <InputTexto>Senha</InputTexto>
@@ -115,6 +140,7 @@ const Login = () => {
                             placeholder="Digite sua senha"
                             secureTextEntry={true}
                             onChangeText={text => setSenha(text)}
+                            value={senha}
                         />
         
                         <EsqueciSenhaBtn onPress={() => setEsqueciSenha(true)}>
@@ -124,7 +150,7 @@ const Login = () => {
                         <ContainerCadEnter>
                             <CadEnterBtn invert={true} onPress={() => handleSignUp()}>
                                 {carregando ?
-                                    <ActivityIndicator color="#ae1b7"/>
+                                    <ActivityIndicator color="#ccc"/>
                                 :
                                     <CadEnterTexto invert={true}>
                                         Cadastre-se
@@ -134,7 +160,7 @@ const Login = () => {
         
                             <CadEnterBtn onPress={() => handleSignIn()}>
                                 {carregando ?
-                                    <ActivityIndicator color="#ae1b7"/>
+                                    <ActivityIndicator color="#ccc"/>
                                 :
                                     <CadEnterTexto>
                                         Entrar
@@ -149,6 +175,7 @@ const Login = () => {
                         <Input 
                             placeholder="Digite seu e-mail"
                             onChangeText={text => setEmail(text)}
+                            value={email}
                         />
 
                         <ContainerCadEnter>
@@ -156,7 +183,7 @@ const Login = () => {
                                 <CadEnterTexto invert={true}>Voltar</CadEnterTexto>
                             </CadEnterBtn>
 
-                            <CadEnterBtn onPress={()=>{handleSignIn()}}>
+                            <CadEnterBtn onPress={()=>{ console.warn('Recuperação de senha enviada!') }}>
                                 <CadEnterTexto>Enviar</CadEnterTexto>
                             </CadEnterBtn>
                         </ContainerCadEnter>

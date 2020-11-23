@@ -12,8 +12,6 @@ import {
 const Perfil = () => {
     const {signOut} = useContext(UsuarioContext);
 
-    const sair = () => {signOut()}
-
     return (
         <Container>
             <Texto>PerfilAluno</Texto>

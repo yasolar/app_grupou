@@ -13,3 +13,24 @@ export const Container = styled.View`
 export const Texto = styled.Text`
     font-size: 24px;
 `;
+
+export const ContainerBtn = styled.View`
+    flex-direction: row;
+    width: 90px;
+    height: 60px;
+`;
+
+export const SairBtn = styled.TouchableOpacity`
+    flex: 1;
+    background-color: #fff;
+    border: 2px solid #ae1b73;
+    border-radius: 5px;
+    justify-content: center;
+    align-items: center; 
+`;
+
+export const TextoBtn = styled.Text`
+    color: #ae1b73;
+    font-size: 20px;
+    font-weight: bold;
+`;

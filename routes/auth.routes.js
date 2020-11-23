@@ -13,20 +13,3 @@ const AuthRoutes = () => {
 }
 
 export default AuthRoutes;
-
-
-/*
-<NavigationContainer>
-    <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Login" component={Login} />
-        
-        Area principal
-        <Stack.Screen name="SpaceTabsAluno" component={TabsScreenAluno}/>
-        <Stack.Screen name="SpaceTabsProfessor" component={TabsScreenProfessor} />
-
-        Cadastro
-        <Stack.Screen name="CadastroAluno" component={CadastroAluno} />
-        <Stack.Screen name="CadastroProfessor" component={CadastroProfessor} />
-    </Stack.Navigator>
-</NavigationContainer>
-*/

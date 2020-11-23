@@ -19,7 +19,7 @@ const UsuarioProvider = ({children}) => {
 
     const signIn = (email, password) => {
         firebase.auth().signInWithEmailAndPassword(email, password).then(res => {
-            console.warn('entrar: ', res)
+            console.log('entrar: ', res)
         }).catch(err => {
             console.warn('Erro de senha e email entrar ==> ', err)
         })
@@ -35,14 +35,14 @@ const UsuarioProvider = ({children}) => {
 
     const signOut = () => {
         firebase.auth().signOut().then(res => {
-            console.warn('sair: ', res)
+            console.log('sair: ', res)
         }).catch(err => {
             console.warn('Erro de senha e email sair ==> ', err)
         })
     }
 
     return(
-        <UsuarioContext.Provider value={{user, tipo, signIn, signUp, signOut}}>
+        <UsuarioContext.Provider value={{user, tipo, setTipo, signIn, signUp, signOut}}>
             {children}
         </UsuarioContext.Provider>
     )

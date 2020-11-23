@@ -23,7 +23,7 @@ export const ContainerBtn = styled.View`
 export const SairBtn = styled.TouchableOpacity`
     flex: 1;
     background-color: #fff;
-    border: 2px solid yellow;
+    border: 2px solid #ae1b73;
     border-radius: 5px;
     justify-content: center;
     align-items: center; 

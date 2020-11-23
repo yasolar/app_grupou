@@ -1,5 +1,5 @@
 import React, {useState, useContext} from 'react'
-import {ImageBackground, StyleSheet, ActivityIndicator } from 'react-native'
+import {ImageBackground, StyleSheet, ActivityIndicator, View } from 'react-native'
 
 import { UsuarioContext } from '../../contexts/user'
 import {
@@ -21,9 +21,8 @@ import {
     CadEnterTexto
 } from './styles'
 
-const Login = () => {
+const Login = ({navigation}) => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
-    // const [email, setEmail] = useState("2010203250@aluno.unicarioca.com"); // 2008458634@professor.unicarioca.com
     const [email, setEmail] = useState("1@aluno.unicarioca.com"); // 1@professor.unicarioca.com
     const [senha, setSenha] = useState("123456");
     const [carregando, setCarregando] = useState(false);
@@ -68,12 +67,14 @@ const Login = () => {
         if (currentBtn === 'aluno' && emailAluno !== -1 ) {
             try{
                 setTipo('aluno');
-                signUp(email, senha);
+                navigation.push('Cadastro');
+                // signUp(email, senha);
             }catch(err){
                 console.warn('login cad erro: ', err)
             }finally{
-            setCarregando(false);
+                setCarregando(false);
             }
+            
         } else if (currentBtn === 'professor' && emailProf !== -1) {
             try{
                 setTipo('professor');

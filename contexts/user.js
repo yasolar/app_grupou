@@ -27,6 +27,17 @@ const UsuarioProvider = ({children}) => {
 
     const signUp = (email, password) => {
         firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
+            try{
+                firebase.firestore().collection('users').doc(res.uid).add({
+                    nome: newMsg,
+                    lida: false,
+                    data: today
+                })
+                setNewMsg('');
+            }catch(err){
+                console.warn('Erro no envio de msg ==> ', err);
+            }
+            
             console.warn('cadastro: ', res)
         }).catch(err => {
             console.warn('Erro de senha e email cadastrar ==> ', err)

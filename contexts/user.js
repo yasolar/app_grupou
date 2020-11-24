@@ -55,8 +55,16 @@ const UsuarioProvider = ({children}) => {
         })
     }
 
+    const forgotPassword = (email) => {
+        firebase.auth().sendPasswordResetEmail(email).then(res => {
+            console.warn('Recuperação enviada, favor checar e-mail!')
+        }).catch(err => {
+            console.warn('Erro de recuperação de senha ==> ', err)
+        })
+    }
+
     return(
-        <UsuarioContext.Provider value={{user, tipo, setTipo, signIn, signUp, signOut}}>
+        <UsuarioContext.Provider value={{user, tipo, setTipo, signIn, signUp, signOut, forgotPassword}}>
             {children}
         </UsuarioContext.Provider>
     )

@@ -79,12 +79,14 @@ const Grupo = (props) => {
         if (data) {
             const gruposFind = data.find(GruposPorId);
 
-            gruposFind.grupos.forEach(grupo => {
-                arrayTurmasId.push(grupo.split('/')[2]);
-                arrayCaminhoGrupos.push(grupo);
-            });
-            setTurmas(arrayTurmasId);
-            setCaminhoGrupo(arrayCaminhoGrupos);
+            if (gruposFind.grupos) {
+                gruposFind.grupos.forEach(grupo => {
+                    arrayTurmasId.push(grupo.split('/')[2]);
+                    arrayCaminhoGrupos.push(grupo);
+                });
+                setTurmas(arrayTurmasId);
+                setCaminhoGrupo(arrayCaminhoGrupos);
+            }
         }
     }
 
@@ -128,17 +130,23 @@ const Grupo = (props) => {
 
     return (
         <Container>
-            <CaixaBranca>  
-                <ContainerBtn>
-                    <InputTexto>Turmas:</InputTexto>
-                    {turmas.map(turma => (
-                        <EnviarBtn onPress={() => { 
-                            handleChatPorTurma(turma);
-                        }}>
-                            <TextoBtn>{turma.nome} - {turma.numero}</TextoBtn>
-                        </EnviarBtn>
-                    ))}
-                </ContainerBtn>
+            <CaixaBranca>
+                {turmas.length > 0 ?
+                    <ContainerBtn>
+                        <InputTexto>Turmas:</InputTexto>
+                            {turmas.map(turma => (
+                                <EnviarBtn onPress={() => { 
+                                    handleChatPorTurma(turma);
+                                }}>
+                                    <TextoBtn>{turma.nome} - {turma.numero}</TextoBtn>
+                                </EnviarBtn>
+                            ))}
+                    </ContainerBtn>
+                :
+                    <ContainerBtn>
+                        <InputTexto>Sem turmas no momento :(</InputTexto>
+                    </ContainerBtn>
+                }
             </CaixaBranca>
 
             {/* Modal chat */}

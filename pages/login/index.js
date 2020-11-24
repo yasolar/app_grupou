@@ -26,19 +26,20 @@ import {
 
 const Login = () => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
-    const [email, setEmail] = useState("1@aluno.unicarioca.com"); // 1@professor.unicarioca.com
-    const [senha, setSenha] = useState("123456");
+    const [email, setEmail] = useState(""); // 1@professor.unicarioca.com ou 1@aluno.unicarioca.com
+    const [senha, setSenha] = useState(""); //123456
     const [carregando, setCarregando] = useState(false);
     const [esqueciSenha, setEsqueciSenha] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [nome, setNome] = useState('');
 
-    const {signIn, signUp, setTipo} = useContext(UsuarioContext);
+    const {signIn, signUp, setTipo, forgotPassword} = useContext(UsuarioContext);
 
     function handleSignIn() {
         setCarregando(true);
         const emailAluno = email.indexOf('@aluno');
         const emailProf = email.indexOf('@professor');
+        const emailYas = email.indexOf('ssousayasmin');
         
         if (currentBtn === 'aluno' && emailAluno !== -1 ) {
             try{
@@ -58,6 +59,15 @@ const Login = () => {
             }finally{
                 setCarregando(false);
             }
+        } else if (currentBtn === 'aluno' && emailYas !== -1) {
+            try{
+                setTipo('aluno');
+                signIn(email, senha);
+            }catch(err){
+                console.warn('login enter yas erro: ', err)
+            }finally{
+                setCarregando(false);
+            }
         } else {
             console.warn('Há informações incorretas!');
             setCarregando(false);
@@ -68,6 +78,7 @@ const Login = () => {
         setCarregando(true);
         const emailAluno = email.indexOf('@aluno');
         const emailProf = email.indexOf('@professor');
+        const emailYas = email.indexOf('ssousayasmin');
 
         if (currentBtn === 'aluno' && emailAluno !== -1 ) {
             try{
@@ -88,8 +99,33 @@ const Login = () => {
             }finally{
             setCarregando(false);
             }
-        } else {
+        } else if (currentBtn === 'aluno' && emailYas !== -1) {
+            try{
+                setTipo('aluno');
+                setModalVisible(true);
+            }catch(err){
+                console.warn('login cad yas erro: ', err)
+            }finally{
+            setCarregando(false);
+            }
+        }else {
             console.warn('Há informações incorretas!');
+            setCarregando(false);
+        }
+    }
+
+    function handleForgotPassword() {
+        setCarregando(true);
+        if (email) {
+            try{
+                forgotPassword(email);
+            }catch(err){
+                console.warn('forgotPassword erro: ', err)
+            }finally{
+                setCarregando(false);
+            }
+        } else {
+            console.warn('Insira campo de email!');
             setCarregando(false);
         }
     }
@@ -218,7 +254,7 @@ const Login = () => {
                                 <CadEnterTexto invert={true}>Voltar</CadEnterTexto>
                             </CadEnterBtn>
 
-                            <CadEnterBtn onPress={()=>{ console.warn('Recuperação de senha enviada!') }}>
+                            <CadEnterBtn onPress={()=>{ handleForgotPassword() }}>
                                 <CadEnterTexto>Enviar</CadEnterTexto>
                             </CadEnterBtn>
                         </ContainerCadEnter>

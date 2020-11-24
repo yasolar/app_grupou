@@ -1,6 +1,7 @@
 import React, {useState, useContext} from 'react'
-import {ImageBackground, StyleSheet, Image, Text } from 'react-native'
-import { UsuarioContext } from '../../contexts/user'
+import {ImageBackground, StyleSheet, Image, Text, Button } from 'react-native'
+import { UsuarioContext } from '../../contexts/user';
+import Login from '../login';
 
 import {
     VoltarBtn,
@@ -24,6 +25,7 @@ const Cadastro = () => {
                     <Text>Matricula</Text>
                     <Text>Curso</Text>
                     <Text>Senha</Text>
+                    <Button title={'Cadastrar'} onClick={() => Login.push('/index')}></Button>
                 </>
             :
                 <>
@@ -35,6 +37,7 @@ const Cadastro = () => {
                     <Text>CPF</Text>
                     <Text>Email</Text>
                     <Text>Senha</Text>
+                    <Button title={'Cadastrar'} onClick={() => Login.push('/index')}></Button>
                 </>
             }
         </>

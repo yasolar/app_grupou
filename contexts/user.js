@@ -1,12 +1,14 @@
 import React, { createContext, useState, useEffect } from 'react';
+import { StyleSheet, TextInput, Text, View, TouchableHighlight, Modal } from 'react-native';
 import firebase from 'firebase';
 import 'firebase/auth';
 
 const UsuarioContext = createContext({});
 
 const UsuarioProvider = ({children}) => {
-    const [user, setUser] = useState('Marcele');
+    const [user, setUser] = useState('');
     const [tipo, setTipo] = useState('aluno');
+    const today = new Date();
 
     const ListenAuth = (userState) => {
         setUser(userState);
@@ -25,20 +27,21 @@ const UsuarioProvider = ({children}) => {
         })
     }
 
-    const signUp = (email, password) => {
+    const signUp = (email, password, nome) => {
+        const emailAluno = email.indexOf('@aluno');
         firebase.auth().createUserWithEmailAndPassword(email, password).then(res => {
-            try{
-                firebase.firestore().collection('users').doc(res.uid).add({
-                    nome: newMsg,
-                    lida: false,
-                    data: today
-                })
-                setNewMsg('');
-            }catch(err){
-                console.warn('Erro no envio de msg ==> ', err);
-            }
-            
-            console.warn('cadastro: ', res)
+            firebase.firestore().collection('users').doc(res.user.uid).set({
+                nome: nome,
+                email: email,
+                grupos: emailAluno !== -1 ? 
+                    ['/turmas/o12w8HwMmJXTzhCXwly7/grupos/LFNPbNRVhwpqiXEmAJmY',
+                    '/turmas/NXNpUFVrzfhe8HREbbha/grupos/VkjHjs9sEXyo5t8pNdqE',
+                    '/turmas/L3bf6284cl3ZToqnEK8w/grupos/3Ls4tOv65qYnoyw2uA1g'] 
+                : false,
+                data: today
+            }).catch(err => {
+                console.warn('Erro de criação de user ==> ', err)
+            })
         }).catch(err => {
             console.warn('Erro de senha e email cadastrar ==> ', err)
         })

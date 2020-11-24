@@ -38,13 +38,10 @@ export const Mensagem = styled.Text`
 
 export const Envio = styled.View`
     flex: 1;
-    /* flex-direction: column; */
-    /* align-items: flex-end; */
     width: 85%;
     margin-top: 15px;
 `;
 export const Input = styled.TextInput`
-    /* width: 85%; */
     height: 95%;
     border: 1px solid #aaa;
     background-color: #d9d9d9;

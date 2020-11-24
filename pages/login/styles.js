@@ -85,7 +85,6 @@ export const ContainerCadEnter = styled.View`
     flex: 1;
     align-items: flex-end;
 `;
-
 export const CadEnterBtn = styled.TouchableOpacity`
     flex: 1;
     width: 100%;
@@ -97,7 +96,6 @@ export const CadEnterBtn = styled.TouchableOpacity`
     align-items: center;
     margin-right: ${props => props.invert ? "10px" : "0px"}; 
 `;
-
 export const CadEnterTexto = styled.Text`
     color: ${props => props.invert ? "#ae1b73" : "#fff"};
     font-size: 16px;

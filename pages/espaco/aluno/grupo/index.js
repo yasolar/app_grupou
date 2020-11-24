@@ -39,7 +39,6 @@ const Grupo = (props) => {
             }
         })
         setCaminhoTodoChat(caminhoChat);
-        setModalVisible(true);
         firebase.firestore().collection(caminhoTodoChat).onSnapshot(ListenerUpdateMsg);
     }
 
@@ -89,6 +88,7 @@ const Grupo = (props) => {
     }
 
     const ListenerUpdateMsg = (snap) => {
+        setMessages([]);
         if (caminhoTodoChat === 'turmas') { console.log('entrou na modal'); return; }
         const data = snap.docs.map(doc => {
             return{
@@ -100,12 +100,12 @@ const Grupo = (props) => {
             return b.data - a.data;
         });
         setMessages(data);
+        setModalVisible(true);
     }
 
     useEffect(() => {
         const listenerGrupo = firebase.firestore().collection('users').onSnapshot(ListenerListaTurma);
         const listenerTurma = firebase.firestore().collection('turmas').onSnapshot(ListenerNomeTurmas);
-        const listenerChat = firebase.firestore().collection(caminhoTodoChat).onSnapshot(ListenerUpdateMsg);
     },[])
 
     const handleAddMsg = () => {
@@ -164,7 +164,6 @@ const Grupo = (props) => {
                             <View style={styles.containerCadBtns}>
                                 <TouchableHighlight style={styles.btnTipo} onPress={() => {
                                     setModalVisible(!modalVisible);
-                                    // setMessages([]);
                                 }}>
                                     <Text style={styles.textStyle}>Voltar</Text>
                                 </TouchableHighlight>
@@ -185,13 +184,12 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: "center",
         alignItems: "center",
-        marginBottom: 30,
     },
     modalView: {
-        margin: 20,
+        // margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
-        padding: 10,
+        // padding: 10,
         justifyContent: "center",
         alignItems: "center",
         shadowColor: "#000",
@@ -201,7 +199,9 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.40,
         shadowRadius: 3.84,
-        elevation: 5
+        elevation: 5,
+        width: 200,
+        height: 350
     },
     inputInfo: {
         borderRadius: 4,

@@ -26,8 +26,8 @@ import {
 
 const Login = () => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
-    const [email, setEmail] = useState(""); // 1@professor.unicarioca.com ou 1@aluno.unicarioca.com
-    const [senha, setSenha] = useState(""); //123456
+    const [email, setEmail] = useState("1@aluno.unicarioca.com"); // 1@professor.unicarioca.com ou 1@aluno.unicarioca.com
+    const [senha, setSenha] = useState("123456"); //123456
     const [carregando, setCarregando] = useState(false);
     const [esqueciSenha, setEsqueciSenha] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);

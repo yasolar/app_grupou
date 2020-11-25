@@ -1,5 +1,5 @@
 import React, {useState, useContext, useEffect} from 'react'
-import { ScrollView, StyleSheet,View, Modal, Text, TouchableHighlight, TextInput } from 'react-native'
+import { ScrollView, StyleSheet,View, Modal, Text, TouchableHighlight, ActivityIndicator, TextInput } from 'react-native'
 import firebase from 'firebase';
 import 'firebase/firestore';
 
@@ -23,7 +23,9 @@ const Grupo = (props) => {
     const [turmas, setTurmas] = useState([]);
     const [caminhoGrupos, setCaminhoGrupo] = useState([]);
     const [caminhoTodoChat, setCaminhoTodoChat] = useState("turmas");
+    // const [carregando, setCarregando] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
+    const [nomeUser, setNomeUser] = useState("");
     const [messages, setMessages] = useState([]);
     const [newMsg, setNewMsg] = useState("");
     const today = new Date();
@@ -33,13 +35,22 @@ const Grupo = (props) => {
     let caminhoChat;
 
     function handleChatPorTurma(turma) {
-        caminhoGrupos.forEach( caminho => {
-            if (caminho.split('/')[2] === turma.id) {
-                caminhoChat = caminho + '/chat';
-            }
-        })
-        setCaminhoTodoChat(caminhoChat);
-        firebase.firestore().collection(caminhoTodoChat).onSnapshot(ListenerUpdateMsg);
+        // setCarregando(true);
+        setMessages([]);
+        try{
+            caminhoGrupos.forEach( caminho => {
+                if (caminho.split('/')[2] === turma.id) {
+                    caminhoChat = caminho + '/chat';
+                }
+            })
+            setCaminhoTodoChat(caminhoChat);
+            firebase.firestore().collection(caminhoTodoChat).onSnapshot(ListenerUpdateMsg);
+        }catch(err){
+            console.warn('chatPorTurma erro: ', err)
+        }
+        // finally{
+        //     setCarregando(false);
+        // }
     }
 
     const GruposPorId = (data) => {
@@ -65,6 +76,7 @@ const Grupo = (props) => {
         } else {
             setTurmas([]);
         }
+        return;
     }
 
     const ListenerListaTurma = (snap) => {    
@@ -76,10 +88,12 @@ const Grupo = (props) => {
         });
 
         if (data) {
-            const gruposFind = data.find(GruposPorId);
+            const userFind = data.find(GruposPorId);
+            const sliptNome = userFind.nome.split(" ")[0];
+            setNomeUser(sliptNome);
 
-            if (gruposFind.grupos) {
-                gruposFind.grupos.forEach(grupo => {
+            if (userFind.grupos) {
+                userFind.grupos.forEach(grupo => {
                     arrayTurmasId.push(grupo.split('/')[2]);
                     arrayCaminhoGrupos.push(grupo);
                 });
@@ -90,6 +104,7 @@ const Grupo = (props) => {
     }
 
     const ListenerUpdateMsg = (snap) => {
+        // setCarregando(true);
         setMessages([]);
         if (caminhoTodoChat === 'turmas') { console.log('entrou na modal'); return; }
         const data = snap.docs.map(doc => {
@@ -101,8 +116,14 @@ const Grupo = (props) => {
         data.sort(function(a,b){
             return b.data - a.data;
         });
-        setMessages(data);
-        setModalVisible(true);
+        try{
+            setMessages(data);
+        }catch(err){
+            console.warn('updateMsg erro: ', err)
+        }finally{
+            // setCarregando(false);
+            setModalVisible(true);
+        }
     }
 
     useEffect(() => {
@@ -118,6 +139,7 @@ const Grupo = (props) => {
         try{
             firebase.firestore().collection(caminhoTodoChat).add({
                 autor: user.uid,
+                nomeAutor: nomeUser,
                 texto: newMsg,
                 lida: false,
                 data: today
@@ -138,7 +160,9 @@ const Grupo = (props) => {
                                 <EnviarBtn onPress={() => { 
                                     handleChatPorTurma(turma);
                                 }}>
-                                    <TextoBtn>{turma.nome} - {turma.numero}</TextoBtn>
+                                    {/* {carregando ? */}
+                                        {/* <ActivityIndicator color="#ccc"/> */}
+                                        <TextoBtn>{turma.nome} - {turma.numero}</TextoBtn>
                                 </EnviarBtn>
                             ))}
                     </ContainerBtn>
@@ -157,7 +181,7 @@ const Grupo = (props) => {
                             <Conversa>
                                 <ScrollView>
                                     {messages.map(msg => (
-                                        <Mensagem>- {msg.texto}</Mensagem>
+                                        <Mensagem>{msg.nomeAutor}: {msg.texto}</Mensagem>
                                     ))}
                                 </ScrollView>
                             </Conversa>
@@ -172,6 +196,7 @@ const Grupo = (props) => {
                             <View style={styles.containerCadBtns}>
                                 <TouchableHighlight style={styles.btnTipo} onPress={() => {
                                     setModalVisible(!modalVisible);
+                                    setMessages([]);
                                 }}>
                                     <Text style={styles.textStyle}>Voltar</Text>
                                 </TouchableHighlight>
@@ -208,8 +233,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.40,
         shadowRadius: 3.84,
         elevation: 5,
-        width: 200,
-        height: 350
+        width: 300,
+        height: 400
     },
     inputInfo: {
         borderRadius: 4,
@@ -225,6 +250,8 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         padding: 15,
         marginHorizontal: 10,
+        marginBottom: 20,
+        marginTop: 20
     },
     textStyle: {
         color: "white",
@@ -232,8 +259,12 @@ const styles = StyleSheet.create({
         textAlign: "center"
     },
     modalText: {
-        marginBottom: 15,
-        textAlign: "center"
+        marginBottom: 10,
+        marginTop: 15,
+        fontSize: 20,
+        fontWeight: "bold",
+        textAlign: "center",
+        color: "#ae1b73"
     },
     containerCadBtns: {
         flexDirection: "row",

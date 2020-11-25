@@ -45,7 +45,7 @@ export const EnviarBtn = styled.TouchableOpacity`
 `;
 export const TextoBtn = styled.Text`
     color: #ae1b73;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
 `;
 
@@ -72,7 +72,7 @@ export const Envio = styled.View`
 export const Input = styled.TextInput`
     height: 95%;
     border: 1px solid #aaa;
-    background-color: #d9d9d9;
+    background-color: #e9e9e9;
     border-radius: 5px;
     padding: 0px 10px;
 `;

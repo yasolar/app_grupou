@@ -114,7 +114,7 @@ const Grupo = (props) => {
             }
         })
         data.sort(function(a,b){
-            return b.data - a.data;
+            return b.data < a.data ? 1 : -1;
         });
         try{
             setMessages(data);

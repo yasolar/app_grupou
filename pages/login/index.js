@@ -26,8 +26,8 @@ import {
 
 const Login = () => {
     const [currentBtn, setCurrentBtn] = useState('aluno');
-    const [email, setEmail] = useState("1@aluno.unicarioca.com"); // 1@professor.unicarioca.com ou 1@aluno.unicarioca.com
-    const [senha, setSenha] = useState("123456"); //123456
+    const [email, setEmail] = useState(""); // 1@professor.unicarioca.com ou 1@aluno.unicarioca.com
+    const [senha, setSenha] = useState(""); //123456
     const [carregando, setCarregando] = useState(false);
     const [esqueciSenha, setEsqueciSenha] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -39,7 +39,6 @@ const Login = () => {
         setCarregando(true);
         const emailAluno = email.indexOf('@aluno');
         const emailProf = email.indexOf('@professor');
-        const emailYas = email.indexOf('ssousayasmin');
         
         if (currentBtn === 'aluno' && emailAluno !== -1 ) {
             try{
@@ -59,15 +58,6 @@ const Login = () => {
             }finally{
                 setCarregando(false);
             }
-        } else if (currentBtn === 'aluno' && emailYas !== -1) {
-            try{
-                setTipo('aluno');
-                signIn(email, senha);
-            }catch(err){
-                console.warn('login enter yas erro: ', err)
-            }finally{
-                setCarregando(false);
-            }
         } else {
             console.warn('Há informações incorretas!');
             setCarregando(false);
@@ -78,7 +68,6 @@ const Login = () => {
         setCarregando(true);
         const emailAluno = email.indexOf('@aluno');
         const emailProf = email.indexOf('@professor');
-        const emailYas = email.indexOf('ssousayasmin');
 
         if (currentBtn === 'aluno' && emailAluno !== -1 ) {
             try{
@@ -99,16 +88,7 @@ const Login = () => {
             }finally{
             setCarregando(false);
             }
-        } else if (currentBtn === 'aluno' && emailYas !== -1) {
-            try{
-                setTipo('aluno');
-                setModalVisible(true);
-            }catch(err){
-                console.warn('login cad yas erro: ', err)
-            }finally{
-            setCarregando(false);
-            }
-        }else {
+        } else {
             console.warn('Há informações incorretas!');
             setCarregando(false);
         }

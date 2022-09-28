@@ -1,5 +1,4 @@
 import React, { createContext, useState, useEffect } from 'react';
-import { StyleSheet, TextInput, Text, View, TouchableHighlight, Modal } from 'react-native';
 import firebase from 'firebase';
 import 'firebase/auth';
 
@@ -51,7 +50,7 @@ const UsuarioProvider = ({children}) => {
         firebase.auth().signOut().then(res => {
             console.log('sair: ', res)
         }).catch(err => {
-            console.warn('Erro de senha e email sair ==> ', err)
+            console.warn('Erro ao sair ==> ', err)
         })
     }
 

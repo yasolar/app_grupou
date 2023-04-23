@@ -1,13 +1,11 @@
-import React, {useState, useContext, useEffect} from 'react'
-import { ScrollView, StyleSheet,View, Modal, Text, TouchableHighlight, ActivityIndicator, TextInput } from 'react-native'
+import React, {useState, useEffect} from 'react'
+import { ScrollView, StyleSheet,View, Modal, Text, TouchableHighlight} from 'react-native'
 import firebase from 'firebase';
 import 'firebase/firestore';
 
-import { UsuarioContext } from '../../../../contexts/user'
 import {
     Container,
     CaixaBranca,
-    Texto,
     InputTexto,
     Conversa,
     Mensagem,
@@ -23,7 +21,6 @@ const Grupo = (props) => {
     const [turmas, setTurmas] = useState([]);
     const [caminhoGrupos, setCaminhoGrupo] = useState([]);
     const [caminhoTodoChat, setCaminhoTodoChat] = useState("turmas");
-    // const [carregando, setCarregando] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
     const [nomeUser, setNomeUser] = useState("");
     const [messages, setMessages] = useState([]);
@@ -35,7 +32,6 @@ const Grupo = (props) => {
     let caminhoChat;
 
     function handleChatPorTurma(turma) {
-        // setCarregando(true);
         setMessages([]);
         try{
             caminhoGrupos.forEach( caminho => {
@@ -48,9 +44,6 @@ const Grupo = (props) => {
         }catch(err){
             console.warn('chatPorTurma erro: ', err)
         }
-        // finally{
-        //     setCarregando(false);
-        // }
     }
 
     const GruposPorId = (data) => {
@@ -104,7 +97,6 @@ const Grupo = (props) => {
     }
 
     const ListenerUpdateMsg = (snap) => {
-        // setCarregando(true);
         setMessages([]);
         if (caminhoTodoChat === 'turmas') { console.log('entrou na modal'); return; }
         const data = snap.docs.map(doc => {
@@ -121,7 +113,6 @@ const Grupo = (props) => {
         }catch(err){
             console.warn('updateMsg erro: ', err)
         }finally{
-            // setCarregando(false);
             setModalVisible(true);
         }
     }
@@ -157,18 +148,14 @@ const Grupo = (props) => {
                     <ContainerBtn>
                         <InputTexto>Turmas:</InputTexto>
                             {turmas.map(turma => (
-                                <EnviarBtn onPress={() => { 
-                                    handleChatPorTurma(turma);
-                                }}>
-                                    {/* {carregando ? */}
-                                        {/* <ActivityIndicator color="#ccc"/> */}
-                                        <TextoBtn>{turma.nome} - {turma.numero}</TextoBtn>
+                                <EnviarBtn onPress={() => {handleChatPorTurma(turma);}}>
+                                <TextoBtn>{turma.nome} - {turma.numero}</TextoBtn>
                                 </EnviarBtn>
                             ))}
                     </ContainerBtn>
                 :
                     <ContainerBtn>
-                        <InputTexto>Sem turmas no momento :(</InputTexto>
+                        <InputTexto>Sem turmas no momento</InputTexto>
                     </ContainerBtn>
                 }
             </CaixaBranca>
@@ -219,16 +206,14 @@ const styles = StyleSheet.create({
         alignItems: "center",
     },
     modalView: {
-        // margin: 20,
         backgroundColor: "white",
         borderRadius: 20,
-        // padding: 10,
         justifyContent: "center",
         alignItems: "center",
         shadowColor: "#000",
         shadowOffset: {
-        width: 0,
-        height: 2
+            width: 0,
+            height: 2
         },
         shadowOpacity: 0.40,
         shadowRadius: 3.84,
